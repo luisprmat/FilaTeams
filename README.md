@@ -2,7 +2,23 @@
 
 Team management plugin for Filament 5. This is the exact implementation of [Laravel 13 Starter Kit Teams](https://www.youtube.com/watch?v=mJtOxawILJk) functionality, just in Filament.
 
-Adds full team functionality — creating teams, switching between them, inviting members, managing roles — wired into Filament's panel with zero configuration on your part. Uses the same database schema as the Laravel starter kit, so you can share team data between a Filament admin panel and a starter kit frontend.
+Adds full team functionality — creating teams, switching between them, inviting members, managing roles — wired into Filament's panel with zero configuration on your part. 
+
+---
+
+## Screenshots
+
+![](https://laraveldaily.com/uploads/2026/04/filateams-switch-team.png)
+
+---
+
+![](https://laraveldaily.com/uploads/2026/04/filateams-team-settings.png)
+
+---
+
+![](https://laraveldaily.com/uploads/2026/04/filateams-invite-user.png)
+
+---
 
 ## Requirements
 
@@ -11,6 +27,8 @@ Adds full team functionality — creating teams, switching between them, invitin
 - Filament 5
 
 This package is designed to be installed on a **fresh Filament project**, right after `filament:install --panels`. It creates its own database tables and takes over the panel's tenancy system, so it's best to set it up before building your resources and pages on top.
+
+---
 
 ## Installation
 
@@ -58,6 +76,8 @@ php artisan migrate
 
 That's it. No additional configuration needed.
 
+---
+
 ## What you get
 
 - **Automatic personal team** — when a user registers, a personal team ("{name}'s Team") is created automatically
@@ -71,6 +91,8 @@ That's it. No additional configuration needed.
 - **Email invitations** — invited users receive an email with an accept link
 - **Role-based permissions** — Owner, Admin, and Member roles with granular permissions
 
+---
+
 ## Roles & Permissions
 
 | Permission | Owner | Admin | Member |
@@ -82,6 +104,8 @@ That's it. No additional configuration needed.
 | Create invitations | Yes | Yes | - |
 | Cancel invitations | Yes | Yes | - |
 
+---
+
 ## Invitation flow
 
 1. An Owner or Admin invites a user by email from the team settings page
@@ -89,6 +113,8 @@ That's it. No additional configuration needed.
 3. If they're logged in and the email matches — they're added to the team immediately
 4. If they're not logged in — they're redirected to login first, then back to accept
 5. Invitations expire after 7 days (configurable)
+
+---
 
 ## For existing users
 
@@ -109,6 +135,8 @@ User::whereDoesntHave('teams')->each(function ($user) use ($action) {
 ```
 
 You can run this in tinker or in a seeder/migration.
+
+---
 
 ## Configuration
 
@@ -139,6 +167,8 @@ return [
 ];
 ```
 
+---
+
 ## Database schema
 
 The package creates three tables and adds one column:
@@ -152,6 +182,8 @@ The package creates three tables and adds one column:
 **`users`** — adds `current_team_id` (nullable foreign key to teams)
 
 This schema matches the Laravel 13 starter kit exactly.
+
+---
 
 ## License
 
