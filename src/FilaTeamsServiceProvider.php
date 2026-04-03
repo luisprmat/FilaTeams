@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams;
 
+use Livewire\Livewire;
 use Filament\Auth\Events\Registered;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use LaravelDaily\FilaTeams\Listeners\CreatePersonalTeam;
-use LaravelDaily\FilaTeams\Livewire\InvitationsManager;
-use LaravelDaily\FilaTeams\Livewire\MembersTable;
 use LaravelDaily\FilaTeams\Models\Team;
 use LaravelDaily\FilaTeams\Policies\TeamPolicy;
-use Livewire\Livewire;
+use LaravelDaily\FilaTeams\Livewire\MembersTable;
+use LaravelDaily\FilaTeams\Livewire\InvitationsManager;
+use LaravelDaily\FilaTeams\Listeners\CreatePersonalTeam;
 
 class FilaTeamsServiceProvider extends ServiceProvider
 {

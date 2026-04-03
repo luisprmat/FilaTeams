@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use LaravelDaily\FilaTeams\Enums\TeamRole;
 use LaravelDaily\FilaTeams\Models\TeamInvitation;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<TeamInvitation>
@@ -21,9 +21,9 @@ class TeamInvitationFactory extends Factory
     public function definition(): array
     {
         return [
-            'email' => fake()->unique()->safeEmail(),
-            'role' => TeamRole::Member,
-            'expires_at' => null,
+            'email'       => fake()->unique()->safeEmail(),
+            'role'        => TeamRole::Member,
+            'expires_at'  => null,
             'accepted_at' => null,
         ];
     }

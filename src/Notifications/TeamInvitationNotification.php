@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace LaravelDaily\FilaTeams\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use LaravelDaily\FilaTeams\Models\TeamInvitation;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class TeamInvitationNotification extends Notification implements ShouldQueue
 {

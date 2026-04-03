@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams\Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use LaravelDaily\FilaTeams\Models\Team;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<Team>
@@ -20,8 +20,8 @@ class TeamFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->company(),
-            'slug' => fake()->unique()->slug(2),
+            'name'        => fake()->company(),
+            'slug'        => fake()->unique()->slug(2),
             'is_personal' => false,
         ];
     }

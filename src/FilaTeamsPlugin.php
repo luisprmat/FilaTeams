@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams;
 
-use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Filament\Contracts\Plugin;
 use LaravelDaily\FilaTeams\Models\Team;
-use LaravelDaily\FilaTeams\Pages\CreateTeamPage;
 use LaravelDaily\FilaTeams\Pages\EditTeam;
+use LaravelDaily\FilaTeams\Pages\CreateTeamPage;
 
 class FilaTeamsPlugin implements Plugin
 {

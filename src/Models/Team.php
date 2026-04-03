@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use LaravelDaily\FilaTeams\Enums\TeamRole;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Filament\Models\Contracts\HasCurrentTenantLabel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use LaravelDaily\FilaTeams\Concerns\GeneratesUniqueTeamSlugs;
 use LaravelDaily\FilaTeams\Database\Factories\TeamFactory;
-use LaravelDaily\FilaTeams\Enums\TeamRole;
+use LaravelDaily\FilaTeams\Concerns\GeneratesUniqueTeamSlugs;
 
 class Team extends Model implements HasCurrentTenantLabel
 {

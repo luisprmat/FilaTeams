@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace LaravelDaily\FilaTeams\Concerns;
 
 use Filament\Panel;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+use LaravelDaily\FilaTeams\Models\Team;
 use LaravelDaily\FilaTeams\Enums\TeamRole;
 use LaravelDaily\FilaTeams\Models\Membership;
-use LaravelDaily\FilaTeams\Models\Team;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait HasTeams
 {

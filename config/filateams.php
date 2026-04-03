@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use LaravelDaily\FilaTeams\Models\Membership;
 use LaravelDaily\FilaTeams\Models\Team;
+use LaravelDaily\FilaTeams\Models\Membership;
 use LaravelDaily\FilaTeams\Models\TeamInvitation;
 
 return [
     'models' => [
-        'team' => Team::class,
+        'team'       => Team::class,
         'membership' => Membership::class,
         'invitation' => TeamInvitation::class,
     ],

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams\Pages;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Pages\Tenancy\RegisterTenant;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Model;
-use LaravelDaily\FilaTeams\Actions\CreateTeam;
+use Filament\Forms\Components\TextInput;
+use Filament\Pages\Tenancy\RegisterTenant;
 use LaravelDaily\FilaTeams\Rules\TeamName;
+use LaravelDaily\FilaTeams\Actions\CreateTeam;
 
 class CreateTeamPage extends RegisterTenant
 {

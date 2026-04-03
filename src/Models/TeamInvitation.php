@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
-use LaravelDaily\FilaTeams\Database\Factories\TeamInvitationFactory;
+use Illuminate\Database\Eloquent\Model;
 use LaravelDaily\FilaTeams\Enums\TeamRole;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use LaravelDaily\FilaTeams\Database\Factories\TeamInvitationFactory;
 
 class TeamInvitation extends Model
 {
@@ -72,8 +72,8 @@ class TeamInvitation extends Model
     protected function casts(): array
     {
         return [
-            'role' => TeamRole::class,
-            'expires_at' => 'datetime',
+            'role'        => TeamRole::class,
+            'expires_at'  => 'datetime',
             'accepted_at' => 'datetime',
         ];
     }

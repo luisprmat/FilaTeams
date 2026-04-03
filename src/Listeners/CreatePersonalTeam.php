@@ -20,7 +20,7 @@ class CreatePersonalTeam
         $action = new CreateTeam;
 
         $action($user, [
-            'name' => $user->name . "'s Team",
+            'name'        => $user->name . "'s Team",
             'is_personal' => true,
         ]);
     }

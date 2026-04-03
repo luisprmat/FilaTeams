@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 use LaravelDaily\FilaTeams\Enums\TeamRole;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Membership extends Pivot
 {
