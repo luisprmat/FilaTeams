@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LaravelDaily\FilaTeams\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use LaravelDaily\FilaTeams\Models\TeamInvitation;
@@ -28,7 +29,13 @@ class TeamInvitationNotification extends Notification implements ShouldQueue
 
     public function toMail(object $notifiable): MailMessage
     {
-        $acceptUrl = route('filateams.invitations.accept', $this->invitation->code);
+        $acceptUrl = $this->invitation->expires_at
+            ? URL::temporarySignedRoute(
+                'filateams.invitations.accept',
+                $this->invitation->expires_at,
+                ['code' => $this->invitation->code]
+            )
+            : URL::signedRoute('filateams.invitations.accept', ['code' => $this->invitation->code]);
 
         return (new MailMessage)
             ->subject("You've been invited to join " . $this->invitation->team->name)

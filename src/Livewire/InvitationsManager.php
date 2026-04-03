@@ -40,7 +40,7 @@ class InvitationsManager extends TableWidget
                 TeamInvitation::query()
                     ->where('team_id', $this->teamId)
                     ->whereNull('accepted_at')
-                    ->where(function ($query) {
+                    ->where(function ($query): void {
                         $query->whereNull('expires_at')
                             ->orWhere('expires_at', '>', now());
                     })
@@ -63,7 +63,7 @@ class InvitationsManager extends TableWidget
                             ->default(TeamRole::Member->value)
                             ->required(),
                     ])
-                    ->action(function (array $data) use ($team, $user) {
+                    ->action(function (array $data) use ($team, $user): void {
                         $invitation = TeamInvitation::create([
                             'team_id'    => $team->id,
                             'email'      => $data['email'],
@@ -102,7 +102,7 @@ class InvitationsManager extends TableWidget
                     ->icon(Heroicon::OutlinedXMark)
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(function (TeamInvitation $record) {
+                    ->action(function (TeamInvitation $record): void {
                         $record->delete();
 
                         Notification::make()

@@ -62,7 +62,7 @@ class MembersTable extends TableWidget
                             ->required(),
                     ])
                     ->fillForm(fn (Membership $record) => ['role' => $record->role->value])
-                    ->action(function (Membership $record, array $data) {
+                    ->action(function (Membership $record, array $data): void {
                         $record->update(['role' => $data['role']]);
 
                         Notification::make()
@@ -77,7 +77,7 @@ class MembersTable extends TableWidget
                     ->icon(Heroicon::OutlinedTrash)
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(function (Membership $record) use ($team) {
+                    ->action(function (Membership $record) use ($team): void {
                         $member = $record->user;
 
                         $record->delete();
@@ -99,7 +99,7 @@ class MembersTable extends TableWidget
                     ->icon(Heroicon::OutlinedArrowRightStartOnRectangle)
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(function (Membership $record) use ($team) {
+                    ->action(function (Membership $record) use ($team): void {
                         $member = $record->user;
 
                         $record->delete();

@@ -10,11 +10,11 @@ trait GeneratesUniqueTeamSlugs
 {
     public static function bootGeneratesUniqueTeamSlugs(): void
     {
-        static::creating(function ($model) {
+        static::creating(function ($model): void {
             $model->slug = static::generateUniqueSlug($model->name);
         });
 
-        static::updating(function ($model) {
+        static::updating(function ($model): void {
             if ($model->isDirty('name')) {
                 $model->slug = static::generateUniqueSlug($model->name, $model->id);
             }

@@ -64,7 +64,7 @@ class TeamInvitation extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (self $invitation) {
+        static::creating(function (self $invitation): void {
             $invitation->code = Str::random(64);
         });
     }
