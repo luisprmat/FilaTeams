@@ -1,22 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Livewire;
 
-use Filament\Actions\Action;
-use Filament\Forms\Components\Select;
-use Filament\Notifications\Notification;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\Action;
 use Filament\Widgets\TableWidget;
+use Filament\Support\Icons\Heroicon;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use LaravelDaily\FilaTeams\Models\Team;
+use Filament\Notifications\Notification;
 use LaravelDaily\FilaTeams\Enums\TeamRole;
 use LaravelDaily\FilaTeams\Models\Membership;
-use LaravelDaily\FilaTeams\Models\Team;
 
 class MembersTable extends TableWidget
 {
-    protected static bool $isDiscovered = false;
-
     public int $teamId;
+
+    protected static bool $isDiscovered = false;
 
     public function getTeam(): Team
     {
@@ -43,16 +46,16 @@ class MembersTable extends TableWidget
                     ->formatStateUsing(fn (TeamRole $state) => $state->label())
                     ->badge()
                     ->color(fn (TeamRole $state) => match ($state) {
-                        TeamRole::Owner => 'danger',
-                        TeamRole::Admin => 'warning',
+                        TeamRole::Owner  => 'danger',
+                        TeamRole::Admin  => 'warning',
                         TeamRole::Member => 'info',
                     }),
             ])
-            ->actions([
+            ->recordActions([
                 Action::make('changeRole')
                     ->label('Change Role')
-                    ->icon('heroicon-o-pencil')
-                    ->form([
+                    ->icon(Heroicon::OutlinedPencil)
+                    ->schema([
                         Select::make('role')
                             ->label('Role')
                             ->options(collect(TeamRole::assignable())->pluck('label', 'value'))
@@ -71,7 +74,7 @@ class MembersTable extends TableWidget
 
                 Action::make('remove')
                     ->label('Remove')
-                    ->icon('heroicon-o-trash')
+                    ->icon(Heroicon::OutlinedTrash)
                     ->color('danger')
                     ->requiresConfirmation()
                     ->action(function (Membership $record) use ($team) {
@@ -93,7 +96,7 @@ class MembersTable extends TableWidget
 
                 Action::make('leave')
                     ->label('Leave Team')
-                    ->icon('heroicon-o-arrow-right-start-on-rectangle')
+                    ->icon(Heroicon::OutlinedArrowRightStartOnRectangle)
                     ->color('danger')
                     ->requiresConfirmation()
                     ->action(function (Membership $record) use ($team) {

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Actions;
 
 use Illuminate\Support\Facades\DB;
+use LaravelDaily\FilaTeams\Models\Team;
 use LaravelDaily\FilaTeams\Enums\TeamRole;
 use LaravelDaily\FilaTeams\Models\Membership;
-use LaravelDaily\FilaTeams\Models\Team;
 
 class CreateTeam
 {
@@ -16,14 +18,14 @@ class CreateTeam
     {
         return DB::transaction(function () use ($user, $data) {
             $team = Team::create([
-                'name' => $data['name'],
+                'name'        => $data['name'],
                 'is_personal' => $data['is_personal'] ?? false,
             ]);
 
             Membership::create([
                 'team_id' => $team->id,
                 'user_id' => $user->id,
-                'role' => TeamRole::Owner->value,
+                'role'    => TeamRole::Owner->value,
             ]);
 
             $user->switchTeam($team);

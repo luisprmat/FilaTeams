@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
 use LaravelDaily\FilaTeams\Models\Team;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TeamPolicy
 {

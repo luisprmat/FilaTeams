@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Concerns;
 
 use Illuminate\Support\Str;
@@ -21,12 +23,12 @@ trait GeneratesUniqueTeamSlugs
 
     public static function generateUniqueSlug(string $name, ?int $excludeId = null): string
     {
-        $slug = Str::slug($name);
+        $slug     = Str::slug($name);
         $original = $slug;
-        $counter = 1;
+        $counter  = 1;
 
         while (static::withTrashed()->where('slug', $slug)->when($excludeId, fn ($query) => $query->where('id', '!=', $excludeId))->exists()) {
-            $slug = $original.'-'.$counter;
+            $slug = $original . '-' . $counter;
             $counter++;
         }
 

@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use LaravelDaily\FilaTeams\Enums\TeamRole;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Filament\Models\Contracts\HasCurrentTenantLabel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use LaravelDaily\FilaTeams\Concerns\GeneratesUniqueTeamSlugs;
 use LaravelDaily\FilaTeams\Database\Factories\TeamFactory;
-use LaravelDaily\FilaTeams\Enums\TeamRole;
+use LaravelDaily\FilaTeams\Concerns\GeneratesUniqueTeamSlugs;
 
 class Team extends Model implements HasCurrentTenantLabel
 {
@@ -20,23 +22,11 @@ class Team extends Model implements HasCurrentTenantLabel
     use HasFactory;
     use SoftDeletes;
 
-    protected static function newFactory(): TeamFactory
-    {
-        return TeamFactory::new();
-    }
-
     protected $fillable = [
         'name',
         'slug',
         'is_personal',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'is_personal' => 'boolean',
-        ];
-    }
 
     public function getRouteKeyName(): string
     {
@@ -69,5 +59,17 @@ class Team extends Model implements HasCurrentTenantLabel
     public function owner(): ?Model
     {
         return $this->members()->wherePivot('role', TeamRole::Owner->value)->first();
+    }
+
+    protected static function newFactory(): TeamFactory
+    {
+        return TeamFactory::new();
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_personal' => 'boolean',
+        ];
     }
 }

@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use LaravelDaily\FilaTeams\Models\TeamInvitation;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class TeamInvitationNotification extends Notification implements ShouldQueue
 {
@@ -29,9 +31,9 @@ class TeamInvitationNotification extends Notification implements ShouldQueue
         $acceptUrl = route('filateams.invitations.accept', $this->invitation->code);
 
         return (new MailMessage)
-            ->subject("You've been invited to join ".$this->invitation->team->name)
-            ->line($this->invitation->inviter->name.' has invited you to join the '.$this->invitation->team->name.' team.')
+            ->subject("You've been invited to join " . $this->invitation->team->name)
+            ->line($this->invitation->inviter->name . ' has invited you to join the ' . $this->invitation->team->name . ' team.')
             ->action('Accept Invitation', $acceptUrl)
-            ->line('This invitation will expire on '.$this->invitation->expires_at->format('F j, Y').'.');
+            ->line('This invitation will expire on ' . $this->invitation->expires_at->format('F j, Y') . '.');
     }
 }

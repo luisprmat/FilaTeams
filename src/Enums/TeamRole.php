@@ -1,12 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Enums;
 
 enum TeamRole: string
 {
-    case Owner = 'owner';
-    case Admin = 'admin';
+    case Owner  = 'owner';
+    case Admin  = 'admin';
     case Member = 'member';
+
+    /**
+     * @return array<int, array{value: string, label: string}>
+     */
+    public static function assignable(): array
+    {
+        return collect(self::cases())
+            ->filter(fn (self $role) => $role !== self::Owner)
+            ->map(fn (self $role) => ['value' => $role->value, 'label' => $role->label()])
+            ->values()
+            ->toArray();
+    }
 
     public function label(): string
     {
@@ -40,8 +54,8 @@ enum TeamRole: string
     public function level(): int
     {
         return match ($this) {
-            self::Owner => 3,
-            self::Admin => 2,
+            self::Owner  => 3,
+            self::Admin  => 2,
             self::Member => 1,
         };
     }
@@ -49,17 +63,5 @@ enum TeamRole: string
     public function isAtLeast(TeamRole $role): bool
     {
         return $this->level() >= $role->level();
-    }
-
-    /**
-     * @return array<int, array{value: string, label: string}>
-     */
-    public static function assignable(): array
-    {
-        return collect(self::cases())
-            ->filter(fn (self $role) => $role !== self::Owner)
-            ->map(fn (self $role) => ['value' => $role->value, 'label' => $role->label()])
-            ->values()
-            ->toArray();
     }
 }

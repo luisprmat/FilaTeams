@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Http\Controllers;
 
-use Filament\Facades\Filament;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Filament\Facades\Filament;
 use Illuminate\Routing\Controller;
+use Illuminate\Http\RedirectResponse;
 use LaravelDaily\FilaTeams\Models\Membership;
 use LaravelDaily\FilaTeams\Models\TeamInvitation;
 

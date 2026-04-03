@@ -1,26 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Pages;
 
 use BackedEnum;
 use Filament\Actions\Action;
+use Filament\Schemas\Schema;
 use Filament\Facades\Filament;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Support\Facades\Gate;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
-use Filament\Pages\Tenancy\EditTenantProfile;
 use Filament\Schemas\Components\Actions;
-use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Livewire;
 use Filament\Support\Facades\FilamentView;
-use Illuminate\Support\Facades\Gate;
 use LaravelDaily\FilaTeams\Rules\TeamName;
+use Filament\Pages\Tenancy\EditTenantProfile;
 
 class EditTeam extends EditTenantProfile
 {
     protected static ?string $slug = 'settings';
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
     public static function getLabel(): string
     {
@@ -67,11 +70,6 @@ class EditTeam extends EditTenantProfile
             ]);
     }
 
-    protected function getRedirectUrl(): ?string
-    {
-        return static::getUrl(tenant: $this->tenant);
-    }
-
     public function deleteTeam(): void
     {
         $team = $this->tenant;
@@ -98,5 +96,10 @@ class EditTeam extends EditTenantProfile
         $team->delete();
 
         $this->redirect(Filament::getUrl(), navigate: FilamentView::hasSpaMode());
+    }
+
+    protected function getRedirectUrl(): ?string
+    {
+        return static::getUrl(tenant: $this->tenant);
     }
 }

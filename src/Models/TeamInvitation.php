@@ -1,23 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
-use LaravelDaily\FilaTeams\Database\Factories\TeamInvitationFactory;
+use Illuminate\Database\Eloquent\Model;
 use LaravelDaily\FilaTeams\Enums\TeamRole;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use LaravelDaily\FilaTeams\Database\Factories\TeamInvitationFactory;
 
 class TeamInvitation extends Model
 {
     /** @use HasFactory<TeamInvitationFactory> */
     use HasFactory;
-
-    protected static function newFactory(): TeamInvitationFactory
-    {
-        return TeamInvitationFactory::new();
-    }
 
     protected $table = 'team_invitations';
 
@@ -30,25 +27,9 @@ class TeamInvitation extends Model
         'accepted_at',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'role' => TeamRole::class,
-            'expires_at' => 'datetime',
-            'accepted_at' => 'datetime',
-        ];
-    }
-
     public function getRouteKeyName(): string
     {
         return 'code';
-    }
-
-    protected static function booted(): void
-    {
-        static::creating(function (self $invitation) {
-            $invitation->code = Str::random(64);
-        });
     }
 
     public function team(): BelongsTo
@@ -74,5 +55,26 @@ class TeamInvitation extends Model
     public function isExpired(): bool
     {
         return $this->expires_at !== null && $this->expires_at->isPast();
+    }
+
+    protected static function newFactory(): TeamInvitationFactory
+    {
+        return TeamInvitationFactory::new();
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (self $invitation) {
+            $invitation->code = Str::random(64);
+        });
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'role'        => TeamRole::class,
+            'expires_at'  => 'datetime',
+            'accepted_at' => 'datetime',
+        ];
     }
 }
