@@ -21,7 +21,7 @@ class AcceptInvitationController extends Controller
             ->firstOrFail();
 
         if ($invitation->isExpired()) {
-            return redirect()->route('filament.admin.auth.login')
+            return redirect(Filament::getLoginUrl())
                 ->with('error', __('filateams::filateams.flash.invitation_expired'));
         }
 
@@ -31,7 +31,7 @@ class AcceptInvitationController extends Controller
         if (! $user) {
             session()->put('url.intended', $request->fullUrl());
 
-            return redirect()->route('filament.admin.auth.login');
+            return redirect(Filament::getLoginUrl());
         }
 
         // Verify the authenticated user's email matches the invitation

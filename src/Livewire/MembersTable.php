@@ -6,6 +6,7 @@ namespace LaravelDaily\FilaTeams\Livewire;
 
 use Filament\Tables\Table;
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
 use Filament\Widgets\TableWidget;
 use Filament\Support\Icons\Heroicon;
 use Filament\Forms\Components\Select;
@@ -113,7 +114,7 @@ class MembersTable extends TableWidget
                             ->title(__('filateams::filateams.notifications.left_team.title'))
                             ->send();
 
-                        $this->redirect(route('filament.admin.pages.dashboard'));
+                        $this->redirect(Filament::getCurrentPanel()->getUrl());
                     })
                     ->visible(fn (Membership $record) => $record->user_id === $user->id && $record->role !== TeamRole::Owner),
             ])
