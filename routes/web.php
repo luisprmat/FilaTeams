@@ -6,5 +6,5 @@ use Illuminate\Support\Facades\Route;
 use LaravelDaily\FilaTeams\Http\Controllers\AcceptInvitationController;
 
 Route::get('/team-invitations/{code}/accept', AcceptInvitationController::class)
-    ->middleware('web')
+    ->middleware(['web', 'signed'])
     ->name('filateams.invitations.accept');

@@ -14,15 +14,23 @@
     "require": {
         "php": "^8.2",
         "filament/filament": "^5.0",
-        "illuminate/support": "^12.0 || ^13.0"
+        "illuminate/contracts": "^11.28|^12.0|^13.0"
     },
     "require-dev": {
         "laravel/pint": "^1.29",
-        "orchestra/testbench": "^9.0|^10.0|^11.0"
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^4.4",
+        "rector/rector": "^2.3"
     },
     "autoload": {
         "psr-4": {
             "LaravelDaily\\FilaTeams\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "LaravelDaily\\FilaTeams\\Database\\Factories\\": "database/factories/"
         }
     },
     "extra": {
@@ -33,5 +41,10 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }

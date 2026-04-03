@@ -29,7 +29,7 @@ class AcceptInvitationController extends Controller
 
         // Not logged in — redirect to login with return URL
         if (! $user) {
-            session()->put('url.intended', route('filateams.invitations.accept', $code));
+            session()->put('url.intended', $request->fullUrl());
 
             return redirect()->route('filament.admin.auth.login');
         }
