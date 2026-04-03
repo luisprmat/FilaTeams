@@ -17,7 +17,7 @@ class CreateTeamPage extends RegisterTenant
 
     public static function getLabel(): string
     {
-        return 'Create Team';
+        return __('filateams::filateams.pages.create_team.label');
     }
 
     public function form(Schema $schema): Schema
@@ -25,7 +25,7 @@ class CreateTeamPage extends RegisterTenant
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label('Team Name')
+                    ->label(__('filateams::filateams.fields.team_name.label'))
                     ->required()
                     ->maxLength(255)
                     ->rules([new TeamName])

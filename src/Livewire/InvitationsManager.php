@@ -46,19 +46,19 @@ class InvitationsManager extends TableWidget
                     })
                     ->with('inviter')
             )
-            ->heading('Pending Invitations')
+            ->heading(__('filateams::filateams.tables.invitations.heading'))
             ->headerActions([
                 Action::make('invite')
-                    ->label('Invite Member')
+                    ->label(__('filateams::filateams.actions.invite_member.label'))
                     ->icon(Heroicon::OutlinedPlus)
                     ->schema([
                         TextInput::make('email')
-                            ->label('Email Address')
+                            ->label(__('filateams::filateams.fields.email_address.label'))
                             ->email()
                             ->required()
                             ->rules([new UniqueTeamInvitation($team)]),
                         Select::make('role')
-                            ->label('Role')
+                            ->label(__('filateams::filateams.fields.role.label'))
                             ->options(collect(TeamRole::assignable())->pluck('label', 'value'))
                             ->default(TeamRole::Member->value)
                             ->required(),
@@ -77,28 +77,27 @@ class InvitationsManager extends TableWidget
 
                         Notification::make()
                             ->success()
-                            ->title('Invitation sent to ' . $data['email'] . '.')
+                            ->title(__('filateams::filateams.notifications.invitation_sent.title', ['email' => $data['email']]))
                             ->send();
                     })
                     ->visible(fn () => $user->hasTeamPermission($team, 'invitation:create')),
             ])
             ->columns([
                 TextColumn::make('email')
-                    ->label('Email')
+                    ->label(__('filateams::filateams.fields.email.label'))
                     ->searchable(),
                 TextColumn::make('role')
-                    ->label('Role')
-                    ->formatStateUsing(fn (TeamRole $state) => $state->label())
+                    ->label(__('filateams::filateams.fields.role.label'))
                     ->badge(),
                 TextColumn::make('inviter.name')
-                    ->label('Invited By'),
+                    ->label(__('filateams::filateams.fields.invited_by.label')),
                 TextColumn::make('expires_at')
-                    ->label('Expires')
+                    ->label(__('filateams::filateams.fields.expires.label'))
                     ->dateTime(),
             ])
             ->actions([
                 Action::make('cancel')
-                    ->label('Cancel')
+                    ->label(__('filateams::filateams.actions.cancel_invitation.label'))
                     ->icon(Heroicon::OutlinedXMark)
                     ->color('danger')
                     ->requiresConfirmation()
@@ -107,13 +106,13 @@ class InvitationsManager extends TableWidget
 
                         Notification::make()
                             ->success()
-                            ->title('Invitation cancelled.')
+                            ->title(__('filateams::filateams.notifications.invitation_cancelled.title'))
                             ->send();
                     })
                     ->visible(fn () => $user->hasTeamPermission($team, 'invitation:cancel')),
             ])
-            ->emptyStateHeading('No pending invitations')
-            ->emptyStateDescription('Invite team members by clicking the button above.')
+            ->emptyStateHeading(__('filateams::filateams.tables.invitations.empty_state.heading'))
+            ->emptyStateDescription(__('filateams::filateams.tables.invitations.empty_state.description'))
             ->paginated(false);
     }
 }

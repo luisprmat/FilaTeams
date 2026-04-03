@@ -27,7 +27,7 @@ class EditTeam extends EditTenantProfile
 
     public static function getLabel(): string
     {
-        return 'Team Settings';
+        return __('filateams::filateams.pages.edit_team.label');
     }
 
     public function form(Schema $schema): Schema
@@ -35,7 +35,7 @@ class EditTeam extends EditTenantProfile
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label('Team Name')
+                    ->label(__('filateams::filateams.fields.team_name.label'))
                     ->required()
                     ->maxLength(255)
                     ->rules([new TeamName]),
@@ -53,16 +53,16 @@ class EditTeam extends EditTenantProfile
                 Livewire::make('filateams-invitations-table', [
                     'teamId' => $this->tenant->id,
                 ])->visible(fn () => auth()->user()->hasTeamPermission($this->tenant, 'invitation:create')),
-                Section::make('Delete Team')
+                Section::make(__('filateams::filateams.sections.delete_team.heading'))
                     ->schema([
                         Actions::make([
                             Action::make('deleteTeam')
-                                ->label('Delete Team')
+                                ->label(__('filateams::filateams.actions.delete_team.label'))
                                 ->color('danger')
                                 ->requiresConfirmation()
-                                ->modalHeading('Delete Team')
-                                ->modalDescription('Are you sure you want to delete this team? This action cannot be undone.')
-                                ->modalSubmitActionLabel('Delete Team')
+                                ->modalHeading(__('filateams::filateams.actions.delete_team.modal_heading'))
+                                ->modalDescription(__('filateams::filateams.actions.delete_team.modal_description'))
+                                ->modalSubmitActionLabel(__('filateams::filateams.actions.delete_team.modal_submit_label'))
                                 ->action(fn () => $this->deleteTeam()),
                         ]),
                     ])
@@ -77,7 +77,7 @@ class EditTeam extends EditTenantProfile
         if ($team->is_personal) {
             Notification::make()
                 ->danger()
-                ->title('Cannot delete personal team.')
+                ->title(__('filateams::filateams.notifications.cannot_delete_personal_team.title'))
                 ->send();
 
             return;
