@@ -50,6 +50,38 @@ it('user can accept invitation with a valid signed url', function (): void {
     expect($invitation->fresh()->accepted_at)->not->toBeNull();
 });
 
+it('expired invitation redirects to the filament panel login page', function (): void {
+    $invitation = TeamInvitation::factory()->create([
+        'team_id'    => $this->team->id,
+        'invited_by' => $this->inviter->id,
+        'email'      => 'invitee@example.com',
+        'expires_at' => now()->subDay(),
+    ]);
+
+    $signedUrl = URL::signedRoute('filateams.invitations.accept', ['code' => $invitation->code]);
+
+    Filament::shouldReceive('getLoginUrl')->once()->andReturn('/custom-panel/login');
+
+    $this->get($signedUrl)
+        ->assertRedirect('/custom-panel/login');
+});
+
+it('unauthenticated user is redirected to the filament panel login page', function (): void {
+    $invitation = TeamInvitation::factory()->create([
+        'team_id'    => $this->team->id,
+        'invited_by' => $this->inviter->id,
+        'email'      => 'invitee@example.com',
+        'expires_at' => now()->addDays(7),
+    ]);
+
+    $signedUrl = URL::signedRoute('filateams.invitations.accept', ['code' => $invitation->code]);
+
+    Filament::shouldReceive('getLoginUrl')->once()->andReturn('/custom-panel/login');
+
+    $this->get($signedUrl)
+        ->assertRedirect('/custom-panel/login');
+});
+
 it('user cannot accept invitation with an expired signed url', function (): void {
     $invitation = TeamInvitation::factory()->create([
         'team_id'    => $this->team->id,
