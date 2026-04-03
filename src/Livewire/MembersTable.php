@@ -7,6 +7,7 @@ namespace LaravelDaily\FilaTeams\Livewire;
 use Filament\Tables\Table;
 use Filament\Actions\Action;
 use Filament\Widgets\TableWidget;
+use Filament\Support\Icons\Heroicon;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use LaravelDaily\FilaTeams\Models\Team;
@@ -50,11 +51,11 @@ class MembersTable extends TableWidget
                         TeamRole::Member => 'info',
                     }),
             ])
-            ->actions([
+            ->recordActions([
                 Action::make('changeRole')
                     ->label('Change Role')
-                    ->icon('heroicon-o-pencil')
-                    ->form([
+                    ->icon(Heroicon::OutlinedPencil)
+                    ->schema([
                         Select::make('role')
                             ->label('Role')
                             ->options(collect(TeamRole::assignable())->pluck('label', 'value'))
@@ -73,7 +74,7 @@ class MembersTable extends TableWidget
 
                 Action::make('remove')
                     ->label('Remove')
-                    ->icon('heroicon-o-trash')
+                    ->icon(Heroicon::OutlinedTrash)
                     ->color('danger')
                     ->requiresConfirmation()
                     ->action(function (Membership $record) use ($team) {
@@ -95,7 +96,7 @@ class MembersTable extends TableWidget
 
                 Action::make('leave')
                     ->label('Leave Team')
-                    ->icon('heroicon-o-arrow-right-start-on-rectangle')
+                    ->icon(Heroicon::OutlinedArrowRightStartOnRectangle)
                     ->color('danger')
                     ->requiresConfirmation()
                     ->action(function (Membership $record) use ($team) {

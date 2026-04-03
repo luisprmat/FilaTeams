@@ -99,7 +99,7 @@ class InvitationsManager extends TableWidget
             ->actions([
                 Action::make('cancel')
                     ->label('Cancel')
-                    ->icon('heroicon-o-x-mark')
+                    ->icon(Heroicon::OutlinedXMark)
                     ->color('danger')
                     ->requiresConfirmation()
                     ->action(function (TeamInvitation $record) {

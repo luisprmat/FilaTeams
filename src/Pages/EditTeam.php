@@ -8,6 +8,7 @@ use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Schemas\Schema;
 use Filament\Facades\Filament;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Gate;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
@@ -22,7 +23,7 @@ class EditTeam extends EditTenantProfile
 {
     protected static ?string $slug = 'settings';
 
-    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
     public static function getLabel(): string
     {
