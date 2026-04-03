@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Livewire;
 
 use Filament\Actions\Action;
@@ -18,9 +20,9 @@ use LaravelDaily\FilaTeams\Rules\UniqueTeamInvitation;
 
 class InvitationsManager extends TableWidget
 {
-    protected static bool $isDiscovered = false;
-
     public int $teamId;
+
+    protected static bool $isDiscovered = false;
 
     public function getTeam(): Team
     {
@@ -74,7 +76,7 @@ class InvitationsManager extends TableWidget
 
                         Notification::make()
                             ->success()
-                            ->title('Invitation sent to '.$data['email'].'.')
+                            ->title('Invitation sent to ' . $data['email'] . '.')
                             ->send();
                     })
                     ->visible(fn () => $user->hasTeamPermission($team, 'invitation:create')),

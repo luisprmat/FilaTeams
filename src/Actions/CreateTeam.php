@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Actions;
 
 use Illuminate\Support\Facades\DB;

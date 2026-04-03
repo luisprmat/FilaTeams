@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Concerns;
 
 use Filament\Panel;
@@ -100,7 +102,7 @@ trait HasTeams
     /**
      * @return array<Model>|Collection
      */
-    public function getTenants(Panel $panel): array|Collection
+    public function getTenants(Panel $panel): array | Collection
     {
         return $this->teams;
     }

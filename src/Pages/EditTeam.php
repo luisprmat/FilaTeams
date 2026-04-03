@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Pages;
 
 use BackedEnum;
@@ -20,7 +22,7 @@ class EditTeam extends EditTenantProfile
 {
     protected static ?string $slug = 'settings';
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cog-6-tooth';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-cog-6-tooth';
 
     public static function getLabel(): string
     {
@@ -67,11 +69,6 @@ class EditTeam extends EditTenantProfile
             ]);
     }
 
-    protected function getRedirectUrl(): ?string
-    {
-        return static::getUrl(tenant: $this->tenant);
-    }
-
     public function deleteTeam(): void
     {
         $team = $this->tenant;
@@ -98,5 +95,10 @@ class EditTeam extends EditTenantProfile
         $team->delete();
 
         $this->redirect(Filament::getUrl(), navigate: FilamentView::hasSpaMode());
+    }
+
+    protected function getRedirectUrl(): ?string
+    {
+        return static::getUrl(tenant: $this->tenant);
     }
 }

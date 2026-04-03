@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Livewire;
 
 use Filament\Actions\Action;
@@ -14,9 +16,9 @@ use LaravelDaily\FilaTeams\Models\Team;
 
 class MembersTable extends TableWidget
 {
-    protected static bool $isDiscovered = false;
-
     public int $teamId;
+
+    protected static bool $isDiscovered = false;
 
     public function getTeam(): Team
     {

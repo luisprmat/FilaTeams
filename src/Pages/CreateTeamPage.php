@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Pages;
 
 use Filament\Forms\Components\TextInput;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Contracts;
 
 use Filament\Models\Contracts\FilamentUser;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use LaravelDaily\FilaTeams\Models\Membership;
 use LaravelDaily\FilaTeams\Models\Team;
 use LaravelDaily\FilaTeams\Models\TeamInvitation;

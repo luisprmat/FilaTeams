@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Concerns;
 
 use Illuminate\Support\Str;
@@ -26,7 +28,7 @@ trait GeneratesUniqueTeamSlugs
         $counter = 1;
 
         while (static::withTrashed()->where('slug', $slug)->when($excludeId, fn ($query) => $query->where('id', '!=', $excludeId))->exists()) {
-            $slug = $original.'-'.$counter;
+            $slug = $original . '-' . $counter;
             $counter++;
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaravelDaily\FilaTeams\Models;
 
 use Filament\Models\Contracts\HasCurrentTenantLabel;
@@ -20,23 +22,11 @@ class Team extends Model implements HasCurrentTenantLabel
     use HasFactory;
     use SoftDeletes;
 
-    protected static function newFactory(): TeamFactory
-    {
-        return TeamFactory::new();
-    }
-
     protected $fillable = [
         'name',
         'slug',
         'is_personal',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'is_personal' => 'boolean',
-        ];
-    }
 
     public function getRouteKeyName(): string
     {
@@ -69,5 +59,17 @@ class Team extends Model implements HasCurrentTenantLabel
     public function owner(): ?Model
     {
         return $this->members()->wherePivot('role', TeamRole::Owner->value)->first();
+    }
+
+    protected static function newFactory(): TeamFactory
+    {
+        return TeamFactory::new();
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_personal' => 'boolean',
+        ];
     }
 }
