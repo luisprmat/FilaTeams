@@ -9,6 +9,7 @@ use Filament\Facades\Filament;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\RedirectResponse;
 use LaravelDaily\FilaTeams\Models\Membership;
+use Symfony\Component\HttpFoundation\Response;
 use LaravelDaily\FilaTeams\Models\TeamInvitation;
 
 class AcceptInvitationController extends Controller
@@ -21,7 +22,7 @@ class AcceptInvitationController extends Controller
 
         if ($invitation->isExpired()) {
             return redirect()->route('filament.admin.auth.login')
-                ->with('error', 'This invitation has expired.');
+                ->with('error', __('filateams::filateams.flash.invitation_expired'));
         }
 
         $user = $request->user();
@@ -35,7 +36,7 @@ class AcceptInvitationController extends Controller
 
         // Verify the authenticated user's email matches the invitation
         if ($user->email !== $invitation->email) {
-            abort(403, 'This invitation was sent to a different email address.');
+            abort(Response::HTTP_FORBIDDEN, __('filateams::filateams.flash.invitation_wrong_email'));
         }
 
         // Already a member — just mark accepted and redirect

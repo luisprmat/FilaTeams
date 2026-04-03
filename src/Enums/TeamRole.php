@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace LaravelDaily\FilaTeams\Enums;
 
-enum TeamRole: string
+use Filament\Support\Contracts\HasLabel;
+use Illuminate\Contracts\Support\Htmlable;
+
+enum TeamRole: string implements HasLabel
 {
     case Owner  = 'owner';
     case Admin  = 'admin';
@@ -17,14 +20,14 @@ enum TeamRole: string
     {
         return collect(self::cases())
             ->filter(fn (self $role) => $role !== self::Owner)
-            ->map(fn (self $role) => ['value' => $role->value, 'label' => $role->label()])
+            ->map(fn (self $role) => ['value' => $role->value, 'label' => $role->getLabel()])
             ->values()
             ->toArray();
     }
 
-    public function label(): string
+    public function getLabel(): string | Htmlable | null
     {
-        return ucfirst($this->value);
+        return __('filateams::filateams.roles.' . $this->value);
     }
 
     /**

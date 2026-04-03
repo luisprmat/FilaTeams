@@ -169,6 +169,18 @@ return [
 
 ---
 
+## Translations
+
+To publish the language files to your application:
+
+```bash
+php artisan vendor:publish --tag=filateams-translations
+```
+
+This copies the files to `lang/vendor/filateams/` where you can modify existing translations or add new languages by creating a folder named after the locale (e.g. `lang/vendor/filateams/de/filateams.php`).
+
+---
+
 ## Database schema
 
 The package creates three tables and adds one column:

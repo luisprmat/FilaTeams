@@ -15,7 +15,7 @@ class EnsureTeamMembership
         $user = $request->user();
 
         if (! $user || ! $user->currentTeam) {
-            abort(403, 'You must be a member of a team to access this resource.');
+            abort(Response::HTTP_FORBIDDEN, __('filateams::filateams.flash.no_team'));
         }
 
         if (! $user->belongsToTeam($user->currentTeam)) {
@@ -23,7 +23,7 @@ class EnsureTeamMembership
             $user->forceFill(['current_team_id' => $fallback?->id])->save();
 
             if (! $fallback) {
-                abort(403, 'You are not a member of any team.');
+                abort(Response::HTTP_FORBIDDEN, __('filateams::filateams.flash.not_member_of_any_team'));
             }
         }
 

@@ -28,6 +28,8 @@ class FilaTeamsServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'filateams');
 
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'filateams');
+
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         Livewire::component('filateams-members-table', MembersTable::class);
@@ -44,5 +46,9 @@ class FilaTeamsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
         ], 'filateams-migrations');
+
+        $this->publishes([
+            __DIR__ . '/../resources/lang' => $this->app->langPath('vendor/filateams'),
+        ], 'filateams-translations');
     }
 }

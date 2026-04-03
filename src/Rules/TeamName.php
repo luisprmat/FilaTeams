@@ -37,7 +37,7 @@ class TeamName implements ValidationRule
         $slug = Str::slug($value);
 
         if (in_array($slug, static::$reservedNames, true)) {
-            $fail('This team name is reserved and cannot be used.');
+            $fail(__('filateams::filateams.validation.team_name.reserved'));
 
             return;
         }
@@ -50,7 +50,7 @@ class TeamName implements ValidationRule
             ->toArray();
 
         if (in_array($slug, $routeSegments, true)) {
-            $fail('This team name conflicts with an existing route and cannot be used.');
+            $fail(__('filateams::filateams.validation.team_name.route_conflict'));
         }
     }
 }

@@ -33,17 +33,16 @@ class MembersTable extends TableWidget
 
         return $table
             ->query(Membership::query()->where('team_id', $this->teamId)->with('user'))
-            ->heading('Team Members')
+            ->heading(__('filateams::filateams.tables.members.heading'))
             ->columns([
                 TextColumn::make('user.name')
-                    ->label('Name')
+                    ->label(__('filateams::filateams.fields.name.label'))
                     ->searchable(),
                 TextColumn::make('user.email')
-                    ->label('Email')
+                    ->label(__('filateams::filateams.fields.email.label'))
                     ->searchable(),
                 TextColumn::make('role')
-                    ->label('Role')
-                    ->formatStateUsing(fn (TeamRole $state) => $state->label())
+                    ->label(__('filateams::filateams.fields.role.label'))
                     ->badge()
                     ->color(fn (TeamRole $state) => match ($state) {
                         TeamRole::Owner  => 'danger',
@@ -53,11 +52,11 @@ class MembersTable extends TableWidget
             ])
             ->recordActions([
                 Action::make('changeRole')
-                    ->label('Change Role')
+                    ->label(__('filateams::filateams.actions.change_role.label'))
                     ->icon(Heroicon::OutlinedPencil)
                     ->schema([
                         Select::make('role')
-                            ->label('Role')
+                            ->label(__('filateams::filateams.fields.role.label'))
                             ->options(collect(TeamRole::assignable())->pluck('label', 'value'))
                             ->required(),
                     ])
@@ -67,13 +66,13 @@ class MembersTable extends TableWidget
 
                         Notification::make()
                             ->success()
-                            ->title('Role updated.')
+                            ->title(__('filateams::filateams.notifications.role_updated.title'))
                             ->send();
                     })
                     ->visible(fn (Membership $record) => $user->hasTeamPermission($team, 'member:update') && $record->role !== TeamRole::Owner),
 
                 Action::make('remove')
-                    ->label('Remove')
+                    ->label(__('filateams::filateams.actions.remove_member.label'))
                     ->icon(Heroicon::OutlinedTrash)
                     ->color('danger')
                     ->requiresConfirmation()
@@ -89,13 +88,13 @@ class MembersTable extends TableWidget
 
                         Notification::make()
                             ->success()
-                            ->title('Member removed.')
+                            ->title(__('filateams::filateams.notifications.member_removed.title'))
                             ->send();
                     })
                     ->visible(fn (Membership $record) => $user->hasTeamPermission($team, 'member:remove') && $record->role !== TeamRole::Owner && $record->user_id !== $user->id),
 
                 Action::make('leave')
-                    ->label('Leave Team')
+                    ->label(__('filateams::filateams.actions.leave_team.label'))
                     ->icon(Heroicon::OutlinedArrowRightStartOnRectangle)
                     ->color('danger')
                     ->requiresConfirmation()
@@ -111,7 +110,7 @@ class MembersTable extends TableWidget
 
                         Notification::make()
                             ->success()
-                            ->title('You have left the team.')
+                            ->title(__('filateams::filateams.notifications.left_team.title'))
                             ->send();
 
                         $this->redirect(route('filament.admin.pages.dashboard'));

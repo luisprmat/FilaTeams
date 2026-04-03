@@ -31,9 +31,9 @@ class TeamInvitationNotification extends Notification implements ShouldQueue
         $acceptUrl = route('filateams.invitations.accept', $this->invitation->code);
 
         return (new MailMessage)
-            ->subject("You've been invited to join " . $this->invitation->team->name)
-            ->line($this->invitation->inviter->name . ' has invited you to join the ' . $this->invitation->team->name . ' team.')
-            ->action('Accept Invitation', $acceptUrl)
-            ->line('This invitation will expire on ' . $this->invitation->expires_at->format('F j, Y') . '.');
+            ->subject(__('filateams::filateams.mail.invitation.subject', ['team' => $this->invitation->team->name]))
+            ->line(__('filateams::filateams.mail.invitation.line_invited', ['inviter' => $this->invitation->inviter->name, 'team' => $this->invitation->team->name]))
+            ->action(__('filateams::filateams.mail.invitation.action_accept'), $acceptUrl)
+            ->line(__('filateams::filateams.mail.invitation.line_expiry', ['date' => $this->invitation->expires_at->format('F j, Y')]));
     }
 }

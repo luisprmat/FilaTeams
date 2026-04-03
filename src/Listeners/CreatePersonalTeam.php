@@ -20,7 +20,7 @@ class CreatePersonalTeam
         $action = new CreateTeam;
 
         $action($user, [
-            'name'        => $user->name . "'s Team",
+            'name'        => __('filateams::filateams.personal_team_name', ['name' => $user->name]),
             'is_personal' => true,
         ]);
     }

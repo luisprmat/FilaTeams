@@ -18,7 +18,7 @@ class UniqueTeamInvitation implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if ($this->team->members()->where('email', $value)->exists()) {
-            $fail('This user is already a team member.');
+            $fail(__('filateams::filateams.validation.invitation.already_member'));
 
             return;
         }
@@ -33,7 +33,7 @@ class UniqueTeamInvitation implements ValidationRule
             ->exists();
 
         if ($hasPendingInvitation) {
-            $fail('A pending invitation already exists for this email.');
+            $fail(__('filateams::filateams.validation.invitation.pending_exists'));
         }
     }
 }
