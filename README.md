@@ -4,6 +4,9 @@ Team management plugin for Filament 5. This is the exact implementation of [Lara
 
 Adds full team functionality — creating teams, switching between them, inviting members, managing roles — wired into Filament's panel with zero configuration on your part. 
 
+Here's a [7-minute YouTube video with package demo](https://www.youtube.com/watch?v=YlO_6ZI55ag).
+For reference, I also have a [33-minute video course on Laravel 13 Teams customizations](https://laraveldaily.com/course/laravel-13-teams).
+
 ---
 
 ## Screenshots
